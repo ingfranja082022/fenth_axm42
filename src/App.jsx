@@ -367,8 +367,6 @@ function Home({ lang }) {
               <div className="text-sm text-gray-500">{amount} {from} ≈</div>
               <div className="text-5xl font-extrabold leading-none text-indigo-950">{formatCurrencyWithCode(convert(), to)}</div>
               <div className="text-xs text-gray-400 mt-1">
-                {t.source} {lastUpdated ? new Date(lastUpdated).toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US') : '—'}
-                <br/>* Incluye recargo operativo del 3.56%
               </div>
             </div>
 
