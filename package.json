@@ -19,6 +19,14 @@
     "nodemailer": "^6.9.7",
     "dotenv": "^16.3.1"
   },
+  "scripts": {
+    "start": "vite preview --port $PORT --host",
+    "dev": "vite",
+    "server": "node server.js",
+    "dev:all": "concurrently \"npm run dev\" \"npm run server\"",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "vite": "^5.4.21",
