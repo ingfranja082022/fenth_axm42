@@ -8,11 +8,18 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 3001
 
+// 1. Permitir CORS para desarrollo y producción
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  origin: '*', // O agrega la URL de tu app en GoDaddy (ej. 'https://g0j5zin9lw.preview.c36.airoapp.ai')
   credentials: true
 }))
+
 app.use(express.json())
+
+// 2. Ruta de comprobación (Health Check) para GoDaddy
+app.get('/', (req, res) => {
+  res.status(200).send('Servidor ejecutándose correctamente')
+})
 
 // Configurar transportador de email con Gmail
 const transporter = nodemailer.createTransport({
