@@ -172,17 +172,25 @@ function Home({ lang }) {
     setLoading(true)
     try {
       const endpoints = [
-        'https://api.exchangerate.host/latest?base=USD', 
-        'https://open.er-api.com/v6/latest/USD'
+        'https://open.er-api.com/v6/latest/USD',
+        'https://api.exchangerate.host/latest?base=USD'
       ]
 
       let data = null
       for (const url of endpoints) {
         try {
-          const res = await fetch(url)
+          const finalUrl = `${url}${url.includes('?') ? '&' : '?'}_=${Date.now()}`
+          const res = await fetch(finalUrl, {
+            cache: 'no-store',
+            headers: { Accept: 'application/json' }
+          })
           if (!res.ok) continue
-          data = await res.json()
-          if (data?.rates) break
+
+          const payload = await res.json()
+          if (payload?.rates && Object.keys(payload.rates).length > 0) {
+            data = payload
+            break
+          }
         } catch (err) {
           console.warn('Fallo al consultar tasa externa:', url, err)
         }
